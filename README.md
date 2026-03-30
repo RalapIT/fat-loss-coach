@@ -17,13 +17,18 @@ This skill turns your AI assistant into a fully functional fat loss coach: it in
 - Collects your stats (gender, height, weight, age, body fat %, training habits)
 - Recommends a diet plan based on your profile
 - Calculates your TDEE and daily macro targets
-- Auto-creates 5 Feishu Bitable tables
+- Auto-creates 6 Feishu Bitable tables (including a personal branded food library)
 - Pre-fills your carb-cycling schedule for the next 2–4 weeks
 
 **Daily Tracking**
 - Log workouts → writes to Training Log + Exercise Detail tables simultaneously
-- Log meals → calculates each food's macros independently, writes to Meal Log
+- Log meals → looks up macros from your branded food library or the built-in food reference table, then writes to Meal Log
 - Log weight/body fat → writes to Body Composition table, calculates progress
+
+**Smart Nutrition Lookup (3-tier priority)**
+1. Personal branded food library (your saved products with label data — most accurate)
+2. Built-in food reference table (`references/food-nutrition.md`, 200+ common foods)
+3. Web search as fallback — new results are saved to your food library
 
 **Auto Calculations (no manual work)**
 - Daily Plan table auto-aggregates actual intake from Meal Log by date
@@ -76,6 +81,9 @@ Today I trained chest: bench press 70kg×8×4 sets, 60 minutes total
 # Log a meal
 Lunch: 200g chicken breast, 150g rice, 100g broccoli
 
+# Log a branded product
+I had a Subway sandwich (check the label: 492kcal, protein 22.5g, carbs 50.4g, fat 21.9g)
+
 # Log weight
 Morning weight: 71.2kg, body fat 17.5%
 
@@ -102,13 +110,18 @@ Show me today's daily report
 - 收集基础数据（性别、身高、体重、年龄、体脂率、训练习惯）
 - 推荐减脂方案（凯圣王碳水循环 / 谭成义极端碳水循环）
 - 计算 TDEE 和每日三大营养素目标
-- 自动创建 5 张飞书多维表格
+- 自动创建 6 张飞书多维表格（含个人品牌食品库）
 - 根据训练计划预排 2~4 周碳日安排，批量写入表格
 
 **日常记录（发数据即记录，无需额外指令）**
 - 发训练数据 → 同步写入训练记录表 + 动作明细表
-- 发饮食数据 → 独立计算每种食物营养素，写入饮食记录表
+- 发饮食数据 → 三级优先查询营养素（品牌食品库 → 内置食物表 → web_search），写入饮食记录表
 - 发体重/体脂 → 写入体重体脂记录表，计算距目标差距
+
+**营养素查询三级优先级**
+1. **个人品牌食品库** — 你保存过的有包装标签的食品（最准确）
+2. **内置食物参考表**（`references/food-nutrition.md`，覆盖 200+ 常见食物）
+3. **Web 搜索兜底** — 查到后自动补录入食品库
 
 **自动汇总（无需手动操作）**
 - 每日计划表按日期自动汇总实际摄入
@@ -159,8 +172,11 @@ cp -r fat-loss-coach/ ~/.openclaw/workspace-<你的bot名>/.agents/skills/
 # 记录训练
 今天练胸，卧推70kg×8×4组，上斜哑铃25kg×10×3组，练了60分钟
 
-# 记录饮食
+# 记录饮食（通用食物）
 午饭吃了鸡胸肉200g、米饭150g、西兰花100g
+
+# 记录饮食（品牌食品，带标签数据）
+午饭吃了Subway三明治（492kcal，蛋白质22.5g，碳水50.4g，脂肪21.9g）
 
 # 记录体重
 今天早上空腹体重71.2kg，体脂17.5%
