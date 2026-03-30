@@ -109,11 +109,12 @@ TDEE = BMR × 活动系数
 
 调用 `feishu_bitable_app` action=create，名称：`[用户名] 减脂日志`，获得 app_token。
 
-然后同时创建以下 4 张表（每张带完整 fields，详见 `references/bitable-schema.md`）：
+然后同时创建以下 5 张表（每张带完整 fields，详见 `references/bitable-schema.md`）：
 - 训练记录（总览字段）
 - 动作明细
 - 饮食记录
 - 体重体脂记录
+- 常吃食品库（字段：食品名称、品牌/来源、分量说明、热量kcal、蛋白质g、碳水g、脂肪g、备注）
 
 **创建后立即验证**：调用 `feishu_bitable_app_table_field` action=list 确认每张表的字段名和 field_id 与预期一致，记录下来备用。
 
